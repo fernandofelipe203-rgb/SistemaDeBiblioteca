@@ -8,7 +8,7 @@ public class Biblioteca {
 
     public void menu() {
         int opcao = -1;
-        while (opcao != 7) {
+        while (opcao != 8) {
             System.out.println("Biblioteca de livros ");
             System.out.println(" 1 - Cadastrar livro ");
             System.out.println(" 2 - Listar livros ");
@@ -16,7 +16,8 @@ public class Biblioteca {
             System.out.println(" 4 - Listar Usuarios ");
             System.out.println(" 5 - Buscar livro ");
             System.out.println(" 6 - Emprestar livro ");
-            System.out.println(" 7 - Sair ");
+            System.out.println(" 7 - Devolver livro ");
+            System.out.println(" 8 - Sair ");
             System.out.print(" Digite sua opçao: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -41,6 +42,10 @@ public class Biblioteca {
                     emprestarLivro();
                     break;
                 case 7:
+                    devolverLivro();
+                    break;
+
+                case 8:
                     System.out.println("===Finalizando===");
                     System.exit(0);
                 default:
@@ -48,10 +53,39 @@ public class Biblioteca {
             }
         }
     }
+    public void devolverLivro(){
+        Livro livro = null;
+        System.out.print(" TITULO DO LIVRO: ");
+        String tituloLivro = scanner.nextLine();
+
+        for(Livro l : livros){
+            if(l.getTitulo().equalsIgnoreCase(tituloLivro)){
+                livro = l;
+                break;
+            }
+        }
+        if(livro == null){
+            System.out.print(" Livro nao encontrado ");
+            return;
+
+        }
+        if(livro.isDisponivel()){
+            System.out.println("Esse livro esta disponivel");
+        }else{
+            livro.setDisponivel(true);
+            System.out.println("Livro devolvido com sucesso");
+
+        }
+
+
+    }
+
+
+
     public void buscarLivro(){
-        System.out.print("Digite o titulo do livro ");
+        System.out.print(" TITULO DO LIVRO ");
         String nomeLivro = scanner.nextLine();
-        System.out.println("Quantidade de livros " + livros.size());
+        System.out.println(" Quantidade de livros " + livros.size());
         boolean encontrou = false;
         for(Livro l : livros){
 
@@ -68,9 +102,9 @@ public class Biblioteca {
     public void emprestarLivro(){
         Usuario usuarioencontrado = null;
         Livro livroEncontrado = null;
-        System.out.print(" Digite seu cpf:");
+        System.out.print(" CPF:");
         String nCpf = scanner.nextLine();
-        System.out.print("Digite o titulo do livro que deseja");
+        System.out.print("Digite o titulo do livro que deseja pegar emprestado ");
         String nomeTitulo = scanner.nextLine();
 
         for(Usuario u: usuarios){
@@ -93,24 +127,24 @@ public class Biblioteca {
         }
         if(livroEncontrado.isDisponivel()){
             livroEncontrado.setDisponivel(false);
-            System.out.print("Livro emprestado com sucesso para " + usuarioencontrado.getNome());
+            System.out.println(" Livro emprestado com sucesso para " + usuarioencontrado.getNome()) ;
         } else{
-            System.out.print("Livro ja foi emprestado");
+            System.out.println(" Livro ja foi emprestado ");
         }
     }
     public  void cadastrarLivro(){
-        System.out.println(" Digite o autor do livro ");
+        System.out.print(" AUTOR: ");
         String autor = scanner.nextLine();
-        System.out.print(" Digite o titulo do livro ");
+        System.out.print(" TITULO: ");
         String titulo = scanner.nextLine();
-        System.out.print(" Digite o preco do livro ");
+        System.out.print(" PRECO ");
         double preco = scanner.nextInt();
         scanner.nextLine();
         Livro livro = new Livro(autor, titulo, preco,true);
         adicionarLivro(livro);
     }
     public void cadastrarUsuario(){
-        System.out.print(" Nome: ");
+        System.out.print(" NOME: ");
         String nome = scanner.nextLine();
         System.out.print(" CPF: ");
         String cpf = scanner.nextLine();
@@ -139,8 +173,5 @@ public class Biblioteca {
             System.out.println("Nome: " + u.getNome() + " - CPF: " + u.getCpf());
         }
     }
-
-
-
 
 }
