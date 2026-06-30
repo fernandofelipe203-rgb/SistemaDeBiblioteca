@@ -35,24 +35,35 @@ public class Biblioteca {
                     scanner.nextLine();
                     Livro livro = new Livro(autor, titulo, preco);
                     biblioteca.adicionarLivro(livro);
+                    livros.add(livro);
                     break;
 
 
                 case 2:
-                    biblioteca.listarLivro();
+                    if(livros.isEmpty()){
+                        System.out.println("Nenhum livro cadastrado");
+                    }else{
+                        biblioteca.listarLivro();
+
+                    }
                     break;
 
                 case 3:
                     System.out.print(" Nome: ");
                     String nome = scanner.nextLine();
                     System.out.print(" CPF: ");
-                    int cpf = scanner.nextInt();
-                    scanner.nextLine();
+                    String cpf = scanner.nextLine();
                     Usuario usuario = new Usuario(nome, cpf);
                     biblioteca.adicionarUsuario(usuario);
+                    usuarios.add(usuario);
+
                     break;
                 case 4:
-                    biblioteca.listarUsuarios();
+                    if(usuarios.isEmpty()){
+                        System.out.println("Nenhum usuario cadastrado");
+                    }else {
+                        biblioteca.listarUsuarios();
+                    }
                     break;
                 case 5:
                     System.out.println("===Finalizando===");

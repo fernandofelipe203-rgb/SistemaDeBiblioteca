@@ -1,6 +1,6 @@
 public class Usuario {
     private String nome;
-    private int cpf;
+    private String cpf;
 
 
     @Override
@@ -12,7 +12,7 @@ public class Usuario {
     }
 
 
-    public Usuario(String nome, int cpf) {
+    public Usuario(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -25,11 +25,11 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 }
