@@ -2,6 +2,7 @@ public class Livro {
     private String autor;
     private String titulo;
     private double preco;
+    private boolean disponivel;
 
 
     @Override
@@ -13,14 +14,12 @@ public class Livro {
                 '}';
     }
 
-    public void exibirLivro(){
 
-
-    }
-    public Livro(String autor, String titulo ,double preco) {
+    public Livro(String autor, String titulo ,double preco, boolean disponivel) {
         this.autor = autor;
         this.titulo = titulo;
         this.preco = preco;
+        this.disponivel = disponivel;
     }
 
     public double getPreco() {
@@ -47,4 +46,11 @@ public class Livro {
         this.titulo = titulo;
     }
 
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
 }

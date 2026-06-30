@@ -1,26 +1,27 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Biblioteca {
-    private Usuario usuario;
-    private Livro livro;
+
 
     Scanner scanner = new Scanner(System.in);
     ArrayList<Livro> livros = new ArrayList<>();
     ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public void menu() {
-        Biblioteca biblioteca = new Biblioteca();
-        int opcoes = -1;
-        while (opcoes != 5) {
+
+        int opcao = -1;
+        while (opcao != 7) {
             System.out.println("Biblioteca de livros ");
             System.out.println(" 1 - Cadastrar livro ");
             System.out.println(" 2 - Listar livros ");
             System.out.println(" 3 - Cadastrar Usuario ");
             System.out.println(" 4 - Listar Usuarios ");
-            System.out.println(" 5 - Sair ");
-            System.out.print(" Digite sua opçao: ");
+            System.out.println(" 5 - Buscar livro ");
+            System.out.println(" 6 - Emprestar livro ");
+            System.out.println(" 7 - Sair ");
 
-            int opcao = scanner.nextInt();
+            System.out.print(" Digite sua opçao: ");
+            opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
@@ -33,17 +34,18 @@ public class Biblioteca {
                     System.out.print(" Digite o preco do livro ");
                     double preco = scanner.nextInt();
                     scanner.nextLine();
-                    Livro livro = new Livro(autor, titulo, preco);
-                    biblioteca.adicionarLivro(livro);
-                    livros.add(livro);
+                    Livro livro = new Livro(autor, titulo, preco,true);
+                    adicionarLivro(livro);
+
                     break;
 
 
                 case 2:
+                    System.out.println(" Quantidade de livros cadastrados: " + livros.size());
                     if(livros.isEmpty()){
                         System.out.println("Nenhum livro cadastrado");
                     }else{
-                        biblioteca.listarLivro();
+                        listarLivro();
 
                     }
                     break;
@@ -54,18 +56,73 @@ public class Biblioteca {
                     System.out.print(" CPF: ");
                     String cpf = scanner.nextLine();
                     Usuario usuario = new Usuario(nome, cpf);
-                    biblioteca.adicionarUsuario(usuario);
-                    usuarios.add(usuario);
+                    adicionarUsuario(usuario);
+
 
                     break;
                 case 4:
+                    System.out.println("Quantidade de usuarios cadastrado " + usuarios.size());
                     if(usuarios.isEmpty()){
                         System.out.println("Nenhum usuario cadastrado");
                     }else {
-                        biblioteca.listarUsuarios();
+                       listarUsuarios();
                     }
                     break;
                 case 5:
+                        System.out.print("Digite o titulo do livro ");
+                        String nomeLivro = scanner.nextLine();
+                        System.out.println("Quantidade de livros " + livros.size());
+
+                        boolean encontrou = false;
+                        for(Livro l : livros){
+
+                            if(l.getTitulo().equalsIgnoreCase(nomeLivro)){
+                                encontrou = true;
+                                System.out.println("Livro encontrado com sucesso");
+                                System.out.println(l.toString());
+                            }
+                        }
+                    if(!encontrou){
+                        System.out.println("Nao encontrado");
+                    }
+
+                        break;
+
+                case 6:
+                    Usuario usuarioencontrado = null;
+                    Livro livroEncontrado = null;
+                    System.out.print(" Digite seu cpf:");
+                    String nCpf = scanner.nextLine();
+                    System.out.print("Digite o titulo do livro que deseja");
+                    String nomeTitulo = scanner.nextLine();
+
+                    for(Usuario u: usuarios){
+                        if(u.getCpf().equalsIgnoreCase(nCpf)){
+                            usuarioencontrado = u;
+                        }
+                    }
+                    if(usuarioencontrado==null) {
+                        System.out.println("Usuario nao econtrado");
+                        break;
+                    }
+                    for(Livro l:livros){
+                        if(l.getTitulo().equalsIgnoreCase(nomeTitulo)){
+                            livroEncontrado=l;
+                        }
+                    }
+                    if (livroEncontrado==null){
+                        System.out.print("Livro nao encontrado");
+                        break;
+                    }
+                    if(livroEncontrado.isDisponivel()){
+                        livroEncontrado.setDisponivel(false);
+                        System.out.print("Livro emprestado com sucesso para " + usuarioencontrado.getNome());
+                    } else{
+                        System.out.print("Livro ja foi emprestado");
+                    }
+                    break;
+
+                case 7:
                     System.out.println("===Finalizando===");
                     System.exit(0);
                 default:
@@ -97,19 +154,5 @@ public class Biblioteca {
     }
 
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
 }
