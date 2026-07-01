@@ -4,10 +4,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Biblioteca biblioteca = new Biblioteca();
 
+        Biblioteca biblioteca = new Biblioteca(scanner);
+        Menu menu = new Menu();
 
-    biblioteca.menu();
+    menu.menu();
 
 
         }

@@ -1,6 +1,9 @@
+import java.time.LocalDateTime;
+
 public class Usuario {
     private String nome;
     private String cpf;
+    private LocalDateTime dataDeCadastro;
 
 
     @Override
@@ -31,6 +34,14 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public LocalDateTime getDataDeCadastro() {
+        return dataDeCadastro;
+    }
+
+    public void setDataDeCadastro(LocalDateTime dataDeCadastro) {
+        this.dataDeCadastro = dataDeCadastro;
     }
 }
 

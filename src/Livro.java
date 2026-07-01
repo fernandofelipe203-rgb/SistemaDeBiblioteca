@@ -1,8 +1,13 @@
+import java.time.LocalDateTime;
+
 public class Livro {
     private String autor;
     private String titulo;
     private double preco;
     private boolean disponivel;
+    private LocalDateTime dataDeCadastro;
+    private LocalDateTime dataDeEmprestimo;
+    private LocalDateTime dataDeDevolucao;
 
 
     @Override
@@ -52,5 +57,21 @@ public class Livro {
 
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
+    }
+
+    public LocalDateTime getDataDeCadastro() {
+        return dataDeCadastro;
+    }
+
+    public void setDataDeCadastro(LocalDateTime dataDeCadastro) {
+        this.dataDeCadastro = dataDeCadastro;
+    }
+
+    public LocalDateTime getDataDeEmprestimo() {
+        return dataDeEmprestimo;
+    }
+
+    public LocalDateTime getDataDeDevolucao() {
+        return dataDeDevolucao;
     }
 }
